@@ -7,7 +7,12 @@ $array = [
         3,
         [
             'test',
-            '111' => 111
+            '111' => 111,
+            'test' => [
+                '12313',
+                9999,
+                'dfsfdf'
+            ]
         ]
     ],
     'qqqq' => [1, 2]
@@ -30,14 +35,17 @@ function countRecursive($array)
 
 var_dump(countRecursive($array));
 
-function renderArray($array, $tabStep = 1, $tabSymbol = ' ', $lineSeparator = PHP_EOL)
+function renderArray($array, $tabStep = 1, $isCli = false)
 {
+    $tabSymbol = $isCli ? ' ' : '&nbsp;';
+    $lineSeparator = $isCli ? PHP_EOL : '<br>';
+
     $tabElement = str_repeat($tabSymbol, 4);
     $tab = str_repeat($tabElement, $tabStep);
 
     $result = "[{$lineSeparator}";
     foreach ($array as $key => $value) {
-        $data = is_array($value) ? renderArray($value, $tabStep + 1, $tabSymbol, $lineSeparator) : $value;
+        $data = is_array($value) ? renderArray($value, $tabStep + 1, $isCli) : $value;
         $result .= "{$tab}{$key} => {$data}{$lineSeparator}";
     }
 
@@ -45,4 +53,4 @@ function renderArray($array, $tabStep = 1, $tabSymbol = ' ', $lineSeparator = PH
     return "{$result}{$endTab}]";
 }
 
-echo renderArray($array, 1, '&nbsp;', '<br>');
+echo renderArray($array);
