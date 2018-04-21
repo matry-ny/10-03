@@ -5,7 +5,10 @@
  * @var string $dir
  * @var string $name
  * @var string $content
+ * @var string $type
  */
+
+var_dump($type);
 
 ?>
 <div class="row">
@@ -17,6 +20,6 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <?= nl2br($content) ?>
+        <?= $content ?>
     </div>
 </div>

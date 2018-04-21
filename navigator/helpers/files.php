@@ -13,3 +13,45 @@ function scanDirectory(string $dir, array $excluded = []): array
 
     return $files;
 }
+
+/**
+ * @param string $type
+ * @return bool
+ */
+function isImage(string $type): bool
+{
+    $imageTypes = [
+        'image/jpeg',
+        'image/jpg',
+        'image/png',
+        'image/gif'
+    ];
+
+    return in_array($type, $imageTypes);
+}
+
+/**
+ * @param string $type
+ * @return bool
+ */
+function isDownloadable(string $type): bool
+{
+    $downloadableTypes = [
+        'application/msword'
+    ];
+
+    return in_array($type, $downloadableTypes);
+}
+
+/**
+ * @param string $type
+ * @return bool
+ */
+function isActive(string $type): bool
+{
+    $activeTypes = [
+        'application/pdf'
+    ];
+
+    return  in_array($type, $activeTypes);
+}

@@ -19,17 +19,40 @@ function filesList(string $dir): array
 
 /**
  * @param string $file
+ * @param bool $toHtml
  * @return string
  */
-function getFileContent(string $file): string
+function getFileContent(string $file, bool $toHtml = true): string
 {
     $handler = fopen($file, 'r');
     $content = '';
     while ($part = fread($handler, 1024)) {
-        $content .= htmlspecialchars($part);
+        $content .= $toHtml ? htmlspecialchars($part) : $part;
     }
 
     fclose($handler);
 
     return $content;
+}
+
+/**
+ * @param string $file
+ * @param bool $terminate
+ */
+function downloadFile(string $file, $terminate = true)
+{
+    header('Content-Description: File Transfer');
+    header('Content-Type: ' . mime_content_type($file));
+    header('Content-Disposition: attachment; filename=' . basename($file));
+    header('Content-Length: ' . filesize($file));
+
+    $handler = fopen($file, 'r');
+    while ($part = fread($handler, 1024)) {
+        echo $part;
+    }
+
+    fclose($handler);
+    if ($terminate) {
+        exit;
+    }
 }
