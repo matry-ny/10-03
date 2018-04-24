@@ -7,6 +7,8 @@ function runApplication(array $configuration)
     global $configStorage;
     $configStorage = $configuration;
 
+    userAuth();
+
     list($controller, $action) = getParts($_SERVER['REQUEST_URI']);
     $controllerFile = getControllerFile($controller);
     $actionFunction = 'action' . camelize($action);

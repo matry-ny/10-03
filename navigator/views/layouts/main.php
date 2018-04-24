@@ -23,6 +23,7 @@
 
 <!-- Begin page content -->
 <main role="main" class="container">
+    <a href="/user/logout" class="btn btn-danger">Logout</a>
     <?= $content ?>
 </main>
 
